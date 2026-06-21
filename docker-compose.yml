@@ -1,0 +1,29 @@
+services:
+  opencode:
+    image: ghcr.io/evilcouncil/opencode-docker:latest
+    container_name: opencode
+    ports:
+      - "4096:4096"
+    environment:
+      UI_PASSWORD: ${UI_PASSWORD}
+    working_dir: /workspace
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:4096/global/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - ./workspace:/workspace
+      - opencode-home:/home/opencode
+    tmpfs:
+      - /home/opencode/.config/openchamber/run
+
+volumes:
+  opencode-home:
