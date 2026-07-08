@@ -21,4 +21,4 @@ services:
         max-file: "3"
     volumes:
       - /srv/opencode:/workspace
-      - /srv/opencode-homedir:/home/opencode
+      - /srv/opencode-homedir:/home/opencode:z
