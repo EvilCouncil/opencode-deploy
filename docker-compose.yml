@@ -21,10 +21,7 @@ services:
         max-file: "3"
     volumes:
       - /srv/opencode:/workspace
-      - opencode-home:/home/opencode
-      - /opt/opencode/opencode.json:/home/opencode/.config/opencode/opencode.json:ro
+      - /srv/opencode-homedir:/home/opencode
     tmpfs:
       - /home/opencode/.config/openchamber/run
 
-volumes:
-  opencode-home:
