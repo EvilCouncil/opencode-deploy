@@ -20,5 +20,5 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - /srv/opencode:/workspace
+      - /srv/opencode:/workspace:z
       - /srv/opencode-homedir:/home/opencode:z
