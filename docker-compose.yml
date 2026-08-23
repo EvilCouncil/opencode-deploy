@@ -1,6 +1,6 @@
 services:
   opencode:
-    image: ghcr.io/evilcouncil/opencode-docker:v1.18.19
+    image: ghcr.io/evilcouncil/opencode-docker:v1.18.21
     container_name: opencode
     ports:
       - "4096:4096"
