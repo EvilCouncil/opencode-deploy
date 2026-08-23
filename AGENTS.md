@@ -25,3 +25,7 @@ This is `opencode-deploy` (`github.com/EvilCouncil/opencode-deploy`), a GitOps d
 ## Tool Usage
 
 Prefer MCP filesystem/ripgrep tools over Bash for file reads/searches. Use Bash for `git` and any `docker compose config` validation.
+
+## Testing
+
+Compose linting via `.github/workflows/lint.yml` (`docker compose config --quiet`) is the only test needed. There is no build, no runtime verification, and no broader validation — if the compose file passes lint, it is correct. Do not add additional checks or validation steps.
