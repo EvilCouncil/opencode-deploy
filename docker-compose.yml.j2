@@ -1,0 +1,29 @@
+services:
+  opencode:
+    image: {{ image }}
+    container_name: {{ container_name }}
+    ports:
+{% for port in ports %}
+      - "{{ port }}"
+{% endfor %}
+    environment:
+{% for key, value in environment.items() %}
+      {{ key }}: {{ value }}
+{% endfor %}
+    working_dir: {{ working_dir }}
+    restart: {{ restart }}
+    healthcheck:
+      test: {{ healthcheck.test | tojson }}
+      interval: {{ healthcheck.interval }}
+      timeout: {{ healthcheck.timeout }}
+      retries: {{ healthcheck.retries }}
+      start_period: {{ healthcheck.start_period }}
+    logging:
+      driver: {{ logging.driver }}
+      options:
+        max-size: "{{ logging.max_size }}"
+        max-file: "{{ logging.max_file }}"
+    volumes:
+{% for volume in volumes %}
+      - {{ volume }}
+{% endfor %}

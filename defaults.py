@@ -1,0 +1,33 @@
+"""
+Default configuration for the opencode Docker stack.
+
+bump.py loads these defaults, applies any --override JSON, renders the Jinja2 template,
+writes docker-compose.yml, validates, and commits+pushes.
+"""
+
+DEFAULTS = {
+    "image": "ghcr.io/evilcouncil/opencode-docker:v1.18.23",
+    "container_name": "opencode",
+    "ports": ["4096:4096"],
+    "environment": {
+        "UI_PASSWORD": "${UI_PASSWORD}",
+    },
+    "working_dir": "/workspace",
+    "restart": "unless-stopped",
+    "healthcheck": {
+        "test": ["CMD-SHELL", "curl -sf http://localhost:4096/global/health || exit 1"],
+        "interval": "30s",
+        "timeout": "10s",
+        "retries": 3,
+        "start_period": "30s",
+    },
+    "logging": {
+        "driver": "json-file",
+        "max_size": "10m",
+        "max_file": "3",
+    },
+    "volumes": [
+        "/srv/opencode:/workspace:z",
+        "/srv/opencode-homedir:/home/opencode:z",
+    ],
+}
